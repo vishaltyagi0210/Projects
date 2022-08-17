@@ -309,11 +309,7 @@ int random_array(int array[][4], int temp[]) {
 
 
 void display(int array[][4], int* cordinate_1, int* cordinate_2) {
-    printf("----------------------\n");
-    void display(int array[][4], int* cordinate_1, int* cordinate_2) {
-    orange();
     printf("---------------------\n");
-    reset();
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (i == *cordinate_1 && j == *cordinate_2) {
@@ -349,11 +345,10 @@ void display(int array[][4], int* cordinate_1, int* cordinate_2) {
                 }
             }
         }
-
         printf("\n");
     }
     printf("---------------------");
-   }
+}
 
 //  function for generate a Random Array
 
