@@ -612,6 +612,10 @@ void add_moves(char array[3][3] , char move , int *temp){
     
     //code for rows;
         i = 0 , j = 0;
+        if(array[1][0] == 'x' && array[1][1] == 'x' && (array[1][2] != 'x' && array[1][2] != 'o')){
+                array[1][2] = 'x';
+                return 0;
+            }
         for(i = 0; i<row; i++){
     //ai code for rows
         //ai code for rows(1,2) (4,5)(6,7)
