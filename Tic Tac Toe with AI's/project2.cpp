@@ -193,7 +193,7 @@ int main(){
             int check_win_cond;
             player_1 = 1;
             int computer = 1;
-            cout<<"Shortly let me tell you the basic difference between AI and Smart computer so that you can easily understand it \nFor example: you enter your 'o' on cordinates (0,0),(0,1) and co incidently 'x' are on cordinates (0,2),(1,2) so ,...\nIn smart computer case: it will resist you from winning by putting x on (0,1) index but Ai computer don't resist you from winning instead it will put another x on (2,1) and win the game\n\nHope you will understand what did i say\nstart the game by pressing any character from  the keyboard";
+            cout<<"Shortly let me tell you the basic difference between AI and Smart computer so that you can easily understand it \nFor example: you enter your 'o' on cordinates (0,0),(0,1) and co incidently 'x' are on cordinates (0,2),(1,2) so ,...\nIn smart computer case: it will resist you from winning by putting x on (0,1) index but Ai computer don't resist you from winning instead it will put another x on (2,1) and win the game\n\nHope you will understand what did i say\nstart the game by pressing any character from  the keyboard";
             getch();
             system("cls");
             cout<<"\nif you want to play first press: ";
@@ -580,7 +580,7 @@ void add_moves(char array[3][3] , char move , int *temp){
             return 0;
         };
         //code for left diagonal from (up to down)
-        if(array[i][j] == 'x' && array[i+1][j+1] == 'x' &&  (array[i+2][j+2] != 'x' && array[i+2][j+2] != 'o')){
+        if(array[i][j] == 'o' && array[i+1][j+1] == 'o' &&  (array[i+2][j+2] != 'x' && array[i+2][j+2] != 'o')){
             array[i+2][j+2] = 'x';
             return 0;
         }
@@ -654,7 +654,7 @@ void add_moves(char array[3][3] , char move , int *temp){
                 array[i][j] = 'x';
                 return 0;
             }
-            else if(array[i][j] == 'x' && array[i+1][j] == 'x' && (array[i+2][j] != 'x' || array[i+2][j] != 'o')){
+            else if(array[i][j] == 'x' && array[i+1][j] == 'x' && (array[i+2][j] != 'x' && array[i+2][j] != 'o')){
                 array[i+2][j] = 'x';
                 return 0;
             }
@@ -681,6 +681,29 @@ void add_moves(char array[3][3] , char move , int *temp){
         i = 0 , j = 0;
         for(i = 0; i<row; i++){
             for(j = 0; j<column-1; j++){
+                //for ai
+                if(array[i][j] == 'x' && (array[i][j+1] != 'x' && array[i][j+1] != 'o') || (array[1][1] != 'o' && array[1][1] != 'x') || (array[i-1][j] != 'o' && array[i-1][j]!= 'x' && i != 0) || (array[i+1][j] != 'o' && array[i+1][j] != 'x' && i != 3) || (array[i][j+2] != 'o' && array[i][j+2] != 'x')){
+                    if(array[1][1] != 'o' && array[1][1] != 'x'){
+                        array[1][1] = 'x';
+                        return 0;
+                    }
+                    else if(array[i][j+1] != 'x' && array[i][j+1] != 'o'){
+                        array[i][j+1] = 'x';
+                        return 0;
+                    }
+                    else if(array[i-1][j] != 'o' && array[i-1][j]!= 'x' && i != 0){
+                        array[i-1][j] = 'x';
+                        return 0;
+                    }
+                    else if(array[i+1][j] != 'o' && array[i+1][j] != 'x' && i != 3){
+                        array[i+1][j] = 'x';
+                        return 0;
+                    }
+                    else{
+                        array[i][j+2] = 'x';
+                        return 0;
+                    }
+                }
                 if(array[i][j] == 'o' && (array[i][j+1] != 'x' && array[i][j+1] != 'o') || (array[1][1] != 'o' && array[1][1] != 'x') || (array[i-1][j] != 'o' && array[i-1][j]!= 'x' && i != 0) || (array[i+1][j] != 'o' && array[i+1][j] != 'x' && i != 3) || (array[i][j+2] != 'o' && array[i][j+2] != 'x')){
                     if(array[1][1] != 'o' && array[1][1] != 'x'){
                         array[1][1] = 'x';
@@ -1020,6 +1043,34 @@ void add_moves(char array[3][3] , char move , int *temp){
     
     
     int display_choices(char name[]){
+        blue();
+        cout<<"\t\t\t\t\tBrief info\n";
+        reset();
+        yellow();
+        cout<<"\t\t\t\t\tTIC TAE TOE\n\n\n";
+        reset();
+        cout<<"In this game you have 3 AI game modes.\n";
+        yellow();
+        cout<<"first:";
+        reset();
+        cout<<"smart computer which resist you from winning\n";
+        yellow();
+        cout<<"second is: ";
+        reset();
+        cout<<"Ai computer which definitely gave you a tough competation because it will not just resist you it will also try to win the game\n";
+        red();
+        cout<<"third is: ";
+        reset();
+        cout<<"cheater computer do cheatings for winning the game\n\n";
+        yellow();
+        cout<<"Hope you will enjoy the game";
+        reset();
+        cout<<"\npress any key to continue";
+        yellow();
+        cout<<".............";
+        reset();
+        getch();
+        system("cls");
         int switch_case;
         name[30];
         cout<<"Enter your name: ";
@@ -1059,7 +1110,7 @@ void add_moves(char array[3][3] , char move , int *temp){
         system("cls");
         cout<<"\t\t\t\t\t\t\t"<<"  Here is your playing result ";
         yellow();
-        cout<<name<<endl<<endl;
+        cout<<name<<endl;
         cout<<"\t\t\t"<<"__Against:__";
         reset();
         green();
