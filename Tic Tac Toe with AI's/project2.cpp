@@ -7,7 +7,7 @@ using namespace std;
 //for array;
 const int row = 3;
 const int column = 3;
-
+int player_1 = 1, player_2 = 1, check_win = 1;
 //color functions
 void yellow();
 void white();
@@ -37,19 +37,19 @@ int check_winner(char[row][column],int*,int*);
 
 //2.function declaration for smart computer playing game
 void computer_first_move(char[row][column]);
-void add_moves_smartcomputer_and_player(char[row][column],char);
+void add_moves_smartcomputer_and_player(char[row][column],char,int*);
     //sub function of add_move_smartcomputer_and_player function
     int computer_moves(char[row][column]);
 
 //3.function declaration for Ai computer
 void Aicomputer_first_move(char[row][column]);
-void add_moves_Aicomputer_and_player(char[row][column],char);
+void add_moves_Aicomputer_and_player(char[row][column],char,int*);
     //sub function of Aicomputer_first_move
     int Ai_computer_moves(char[row][column]);
 
 //4.function declaration for cheater computer
 void cheater_computer_first_move(char[row][column]);
-void add_moves_cheatercomputer_and_player(char[row][column],char);
+void add_moves_cheatercomputer_and_player(char[row][column],char,int*);
     //sub function of cheater computer
     int cheater_computer_moves(char[row][column]);
 
@@ -61,7 +61,10 @@ int main(){
     int switch_case;
     int temp = 0;
     char move;
-    int player_1 = 1 , player_2 = 1 , check_win = 1;
+    //globally declared
+    player_1 = 1 , player_2 = 1; 
+    check_win = 1;
+    ////////
     char while_case;
     // putting loop for this process continue until user wants to exit;
     do{
@@ -128,7 +131,7 @@ int main(){
         case 2:
         {
             system("cls");
-            int check_win_cond;
+            check_win = 1;
             player_1 = 1;
             int computer = 1;
             cout<<"if you want to play first press: ";
@@ -148,9 +151,9 @@ int main(){
             display(array);
 
             //loop for calling functions...........
-            for(int i = 0; ; i++){
-            check_win_cond = check_winner(array,&player_1,&computer);
-            if(check_win_cond == 0){
+            for(int i = 0; check_win ; i++){
+            check_win = check_winner(array,&player_1,&computer);
+            if(check_win == 0){
                 break;
             }
             cout<<"Enter your move ";
@@ -158,7 +161,7 @@ int main(){
             cout<<name<<" ";
             reset();
             cin>>move;
-            add_moves_smartcomputer_and_player(array,move);
+            add_moves_smartcomputer_and_player(array,move,&check_win);
             system("cls");
             display(array);
             }
@@ -190,7 +193,7 @@ int main(){
         case 3: 
         {
             system("cls");
-            int check_win_cond;
+            check_win = 1;
             player_1 = 1;
             int computer = 1;
             cout<<"Shortly let me tell you the basic difference between AI and Smart computer so that you can easily understand it \nFor example: you enter your 'o' on cordinates (0,0),(0,1) and co incidently 'x' are on cordinates (0,2),(1,2) so ,...\nIn smart computer case: it will resist you from winning by putting x on (0,1) index but Ai computer don't resist you from winning instead it will put another x on (2,1) and win the game\n\nHope you will understand what did i say\nstart the game by pressing any character from  the keyboard";
@@ -212,9 +215,9 @@ int main(){
             }
             display(array);
             //loop for calling functions......
-            for(int i = 0; ; i++){
-            check_win_cond = check_winner(array,&player_1,&computer);
-            if(check_win_cond == 0){
+            for(int i = 0; check_win ; i++){
+            check_win = check_winner(array,&player_1,&computer);
+            if(check_win == 0){
                 break;
             }
             cout<<"Enter your move ";
@@ -222,7 +225,7 @@ int main(){
             cout<<name<<" ";
             reset();
             cin>>move;
-            add_moves_Aicomputer_and_player(array,move);
+            add_moves_Aicomputer_and_player(array,move,&check_win);
             system("cls");
             display(array);
             }
@@ -254,7 +257,7 @@ int main(){
         case 4:
         {
             system("cls");
-            int check_win_cond;
+            check_win = 1;
             player_1 = 1;
             int computer = 1;
             cout<<"if you want to play first press: ";
@@ -273,9 +276,9 @@ int main(){
             }
             display(array);
             //for loop for calling function again and again
-            for(int i = 0; ; i++){
-            check_win_cond = check_winner(array,&player_1,&computer);
-            if(check_win_cond == 0){
+            for(int i = 0; check_win ; i++){
+            check_win = check_winner(array,&player_1,&computer);
+            if(check_win == 0){
                 break;
             }
             cout<<"Enter your move ";
@@ -283,7 +286,7 @@ int main(){
             cout<<name<<" ";
             reset();
             cin>>move;
-            add_moves_cheatercomputer_and_player(array,move);
+            add_moves_cheatercomputer_and_player(array,move,&check_win);
             system("cls");
             display(array);
             }
@@ -367,12 +370,17 @@ void add_moves(char array[3][3] , char move , int *temp){
     };
 
     //function for taking moves input from player and give computer move also
-    void add_moves_smartcomputer_and_player(char array[3][3], char move){
+    void add_moves_smartcomputer_and_player(char array[3][3], char move , int *check_win){
         int j , tempp = 0;
         for(int i = 0; i<row; i++){
             for(j = 0; j<column; j++){
                 if(array[i][j] == move){
                     array[i][j] = 'o';
+                    *check_win = check_winner(array,&player_1,&player_2);
+                    if(*check_win == 0){
+                        tempp = 1;
+                        break;
+                    }
                     computer_moves(array);
                     tempp = 1;
                     break;
@@ -527,12 +535,17 @@ void add_moves(char array[3][3] , char move , int *temp){
     };
 
     //code for moves
-    void add_moves_Aicomputer_and_player(char array[3][3] , char move){
+    void add_moves_Aicomputer_and_player(char array[3][3] , char move , int *check_win){
     int j , tempp = 0;
     for(int i = 0; i<row; i++){
         for(j = 0; j<column; j++){
             if(array[i][j] == move){
                 array[i][j] = 'o';
+                *check_win = check_winner(array,&player_1,&player_2);
+                if(*check_win == 0){
+                    tempp = 1;
+                    break;
+                }
                 Ai_computer_moves(array);
                 tempp = 1;
                 break;
@@ -789,12 +802,17 @@ void add_moves(char array[3][3] , char move , int *temp){
     };
 
     //add moves in cheater computer
-    void add_moves_cheatercomputer_and_player(char array[3][3] , char move){
+    void add_moves_cheatercomputer_and_player(char array[3][3] , char move , int *check_win){
     int j , tempp = 0;
     for(int i = 0; i<row; i++){
         for(j = 0; j<column; j++){
             if(array[i][j] == move){
                 array[i][j] = 'o';
+                *check_win = check_winner(array,&player_1,&player_2);
+                if(*check_win == 0){
+                    tempp = 1;
+                    break;
+                }
                 cheater_computer_moves(array);
                 tempp = 1;
                 break;
