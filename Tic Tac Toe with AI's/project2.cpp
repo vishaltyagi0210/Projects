@@ -836,6 +836,20 @@ void add_moves(char array[3][3] , char move , int *temp){
     i = 0 , j = 0;
     for(i = 0; i<row; i++){
     //code for rows (1,2) , (4,5), (7,8) from (left to right)
+    if(array[i][j] == 'x' && array[i][j+1] == 'x' && (array[i][j+2] != 'x' && array[i][j+2] != 'o')){
+            array[i][j+2] = 'x';
+            return 0;
+        }
+    //code for rows (2,3) , (4,5) , (6,7) from (right to left)
+        else if(array[i][j+2] == 'x' && array[i][j+1] =='x' && (array[i][j] != 'x' && array[i][j] != 'o')){
+            array[i][j] = 'x';
+            return 0;
+        }
+    //code for mid line from row
+        if(array[i][j] == 'x' && array[i][j+2] == 'x' && (array[i][j+1] != 'o' && array[i][j+1] != 'x')){
+            array[i][j+1] = 'x';
+            return 0;
+        }
         if(array[i][j] == 'o' && array[i][j+1] == 'o' && (array[i][j+2] != 'x' && array[i][j+2] != 'o')){
             array[i][j+2] = 'x';
             return 0;
@@ -920,8 +934,11 @@ void add_moves(char array[3][3] , char move , int *temp){
     //for element (2,2)
     i = 0 , j = 0;
     if(array[2][2] == 'o' && ((array[1][2] != 'o' && array[1][2] != 'x') || (array[1][1] != 'o' && array[1][1] != 'x'))){
-        if((array[1][1] != 'o' && array[1][1] != 'x')){
+        if((array[1][1] != 'o' && array[1][1] != 'x') || (array[0][2] != 'x' && array[0][2] != 'o')){
         array[1][1] = 'x';
+        }
+        else if(array[0][2] != 'x' && array[0][2] != 'o'){
+            array[0][2] = 'x';
         }
         else{
             array[1][2] = 'x';
