@@ -648,6 +648,10 @@ void add_moves(char array[3][3] , char move , int *temp){
     
     //code for columns;
         i = 0 , j = 0;
+        if(array[i][j+1] == 'x' && array[i+1][j+1] == 'x' && (array[i+2][j+1] != 'x' && array[i+2][j+1] != 'o')){
+                array[i+2][j+1] = 'x';
+                return 0;
+        }
         for(j = 0; j<column; j++){
             //ai code for column from up to down
             if(array[i+2][j] == 'x' && array[i+1][j] == 'x' && (array[i][j] != 'x' && array[i][j] != 'o')){
