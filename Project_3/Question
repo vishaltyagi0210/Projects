@@ -1,0 +1,44 @@
+Problem 1:
+Suppose there are two roads,
+Road 1: ABC Road, represented by equation 5x + y - 3 = 0
+Road 2: XYZ Road, represented by equation 2x + 3y + 1 = 0
+These two roads meet each other at a chowk, called 123 Chowk.
+Determine at which angle , these two roads meet each other at chowk.
+What you have to do :
+Create a Program which determines angle at which these roads meet at 123 Chowk.
+
+
+Problem 2:
+
+Project 3: Problem Statement 2
+Saurabh Sir stays in Bhopal,
+Prateek Sir stays in Bangalore.
+Using GPS:
+Latitude and Longitude values of Bhopal as 23.259933 N, 77.412613 E.
+Latitude and Longitude values of Bangalore as 12.9716 N, 77.5946 E.
+Calculate distance between Saurabh Sir and Prateek Sir.
+
+
+Problem 3:
+
+Looking at an above image, actually that image is zoomed up version of pdf file.
+
+As we see there is ‘A’ shaped character, it has three vertices which has coordinates
+
+Project 3: Problem Statement 3
+(20.077,
+11.598) , (26.526, 90.138) , (23.674, 32.579).
+
+We have to cover the area under ‘A’ shaped character and colour it black.
+Calculate area under ‘A’ shaped character
+
+
+Requirement....................................................................................
+What we expect :
+Your folder should contain:
+1. Library.c : All function definition should be included in this file.
+2. Library.h : All function declarations should be included in this file.
+3. Problem1.c : Problem Statement 1
+4. Problem2.c : Problem Statement 2
+5. Problem3.c : Problem Statement 3
+6. Project should be uploaded on Github
